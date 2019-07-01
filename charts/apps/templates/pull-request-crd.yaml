@@ -1,0 +1,18 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: pullrequests.stable.liatr.io
+  labels:
+    app.kubernetes.io/managed-by: helm
+spec:
+  group: stable.liatr.io
+  versions:
+    - name: v1
+      served: true
+      storage: true
+  version: v1
+  scope: Namespaced
+  names:
+    plural: pullrequests
+    singular: pullrequest
+    kind: PullRequest

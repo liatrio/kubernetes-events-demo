@@ -1,0 +1,16 @@
+{
+  "name": "prometheus-agent",
+  "version": "1.0.0",
+  "description": "Sample Prometheus agent for monitory K8 events",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Schreiber <chriss@liatrio.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "kubernetes-client": "^8.3.0"
+  }
+}

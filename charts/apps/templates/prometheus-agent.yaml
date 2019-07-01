@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-agent
+  labels:
+    app: prometheus-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-agent
+  template:
+    metadata:
+      labels:
+        app: prometheus-agent
+    spec:
+      containers:
+      - name: prometheus-agent
+        image: {{ .Values.prometheusagent.image }}
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: promethus-agent
+  labels:
+    app: promethus-agent
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: promethus-agent

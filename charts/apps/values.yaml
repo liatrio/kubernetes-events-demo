@@ -1,0 +1,2 @@
+prometheusagent:
+  image: prometheus-agent:latest

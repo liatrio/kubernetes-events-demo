@@ -1,0 +1,15 @@
+apiVersion: skaffold/v1beta11
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+  - image: prometheus-agent
+    context: prometheus-agent
+deploy:
+  helm:
+    releases:
+    - name: blog-kubernetes-events-apps
+      chartPath: charts/apps
+      values:
+        prometheusagent.image: prometheus-agent
