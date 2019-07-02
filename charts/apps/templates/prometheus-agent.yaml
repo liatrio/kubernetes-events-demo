@@ -23,15 +23,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: promethus-agent
+  name: prometheus-agent
   labels:
-    app: promethus-agent
+    app: prometheus-agent
 spec:
   type: ClusterIP
   ports:
     - port: 3000
-      targetPort: http
+      targetPort: 3000
       protocol: TCP
-      name: http
   selector:
-    app: promethus-agent
+    app: prometheus-agent

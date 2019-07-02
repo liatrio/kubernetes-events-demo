@@ -19,19 +19,48 @@ spec:
         image: prom/prometheus
         ports:
         - containerPort: 9090
+        volumeMounts:
+        - name: config
+          mountPath: /etc/prometheus/prometheus.yml
+          subPath: prometheus.yml
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus-config
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: promethus
+  name: prometheus
   labels:
-    app: promethus
+    app: prometheus
 spec:
   type: ClusterIP
   ports:
-    - port: 9090
-      targetPort: http
-      protocol: TCP
-      name: http
+  - port: 9090
+    targetPort: 9090
+    protocol: TCP
   selector:
-    app: promethus
+    app: prometheus
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval:     15s
+      evaluation_interval: 15s
+
+    rule_files:
+      # - "first.rules"
+      # - "second.rules"
+
+    scrape_configs:
+      #- job_name: prometheus
+      #  static_configs:
+      #    - targets: ['localhost:9090']
+      - job_name: github
+        static_configs:
+          - targets: ['prometheus-agent.default.svc.cluster.local:3000']
