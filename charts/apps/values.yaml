@@ -1,2 +1,4 @@
 prometheusagent:
   image: prometheus-agent:latest
+webhooklistener:
+  image: webhook-listener:latest

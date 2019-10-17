@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhook-listener
+  labels:
+    app: webhook-listener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webhook-listener
+  template:
+    metadata:
+      labels:
+        app: webhook-listener
+    spec:
+      containers:
+      - name: webhook-listener
+        image: {{ .Values.webhooklistener.image }}
+        ports:
+        - containerPort: 4000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webhook-listener
+  labels:
+    app: webhook-listener
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4000
+      targetPort: 4000
+      protocol: TCP
+  selector:
+    app: webhook-listener

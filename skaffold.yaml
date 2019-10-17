@@ -6,6 +6,8 @@ build:
   artifacts:
   - image: prometheus-agent
     context: prometheus-agent
+  - image: webhook-listener
+    context: webhook-listener
 deploy:
   helm:
     releases:
@@ -13,3 +15,5 @@ deploy:
       chartPath: charts/apps
       values:
         prometheusagent.image: prometheus-agent
+        webhooklistener.image: webhook-listener
+

@@ -84,6 +84,12 @@ const run = async () => {
       metadata: {
         name: `test-${Date.now()}`,
       },
+      spec: {
+        user: request.pull_request.user.login,
+        branch: request.pull_request.head.ref,
+        status: request.pull_request.state,
+        id: request.pull_request.number,
+      }
     },
   });
 

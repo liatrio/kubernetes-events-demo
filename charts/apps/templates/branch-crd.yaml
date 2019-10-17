@@ -1,7 +1,7 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: pullrequests.stable.liatr.io
+  name: branches.stable.liatr.io
   labels:
     app.kubernetes.io/managed-by: helm
 spec:
@@ -13,20 +13,16 @@ spec:
   version: v1
   scope: Namespaced
   names:
-    plural: pullrequests
-    singular: pullrequest
-    kind: PullRequest
+    plural: branches
+    singular: branch
+    kind: Branch
   validation:
     openAPIV3Schema:
       properties:
         spec:
-          required: ["user", "branch", "status", "id"]
+          required: ["state", "name"]
           properties:
-            user:
+            state:
               type: string
-            branch:
-              type: string
-            status:
-              type: string
-            id:
+            name:
               type: string
